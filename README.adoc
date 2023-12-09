@@ -1,0 +1,90 @@
+= OpenBSD Router
+Jordan Williams <jordan@jwillikers.com>
+:experimental:
+:icons: font
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+:OpenBSD: https://www.openbsd.org/[OpenBSD]
+:Protectli: https://protectli.com[Protectli]
+
+The configuration for running my home {OpenBSD} router.
+I use a {Protectli} vault, which I highly recommend.
+
+// todo Provide additional static, local IPv6 addresses through DHCPv6 on my local network.
+// Then provide IPv6 addresses for the DNS servers on the router.
+// This will require using ISC's kea, `kea` package, instead of the local dhcp server.
+
+.Features
+. Firewall
+. DHCP
+. IPv6
+. Multicast
+. VLAN
+. DNS caching
+. DNS over TLS
+. Support for Matter IoT devices
+
+.Services
+* PF
+. DHCPd
+* DHCPCD
+* Unbound
+
+== Overview
+
+todo Describe VLAN configuration and how everything ties together.
+
+todo Discuss issues preferring IPv6 over IPv4.
+
+== Usage
+
+. Install OpenBSD.
+The process is documented in the https://www.openbsd.org/faq/faq4.html[OpenBSD FAQ - Installation Guide]
+No graphical utilities are needed.
+
+. Install the necessary packages.
++
+[,sh]
+----
+doas pkg_add dhcpcd fish git tmux
+----
+
+. Clone the repository.
++
+[,sh]
+----
+git clone https://github.com/jwillikers/openbsd-router
+----
+
+. Change to the project's directory.
++
+[,sh]
+----
+cd openbsd-router
+----
+
+. Install or symlink everything.
+Someday, Id like to create a better way to automate this.
+And care really needs to be taken when modifying the doas configuration.
+I should add special instructions for that as well.
+
+. Reboot to finish the installation.
+
+== Code of Conduct
+
+The project's Code of Conduct is available in the link:CODE_OF_CONDUCT.adoc[] file.
+
+== License
+
+This project is licensed under the https://creativecommons.org/licenses/by-sa/4.0/legalcode[Creative Commons Attribution-ShareAlike 4.0 International License].
+
+© 2023 Jordan Williams
+
+== Authors
+
+mailto:{email}[{author}]

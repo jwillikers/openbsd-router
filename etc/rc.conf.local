@@ -1,0 +1,7 @@
+dhcpd_flags=vport0 vlan2 vlan3 vlan4
+pkg_scripts=dhcpcd
+rad_flags=
+sndiod_flags=NO
+unbound_flags=
+mrouted_flags=
+multicast=YES
