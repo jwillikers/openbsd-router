@@ -9,11 +9,15 @@
         "inet",
         "jwillikers",
         "messagebus",
+        "mrouted",
         "pgrep",
         "pinephone",
         "Protectli",
         "SIGHUP",
         "sndiod",
-        "tailscaled"
+        "SNMP",
+        "tailscale",
+        "tailscaled",
+        "vport"
     ]
 }

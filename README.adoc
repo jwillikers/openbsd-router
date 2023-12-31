@@ -9,10 +9,18 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
+:dhcpd: https://man.openbsd.org/dhcpd[dhcpd]
+:dhcpcd: https://roy.marples.name/projects/dhcpcd[dhcpcd]
+:mrouted: https://man.openbsd.org/mrouted[mrouted]
 :OpenBSD: https://www.openbsd.org/[OpenBSD]
+:PF: https://www.openbsd.org/faq/pf/index.html[PF]
 :Protectli: https://protectli.com[Protectli]
+:rad: https://man.openbsd.org/rad[rad]
+:snmpd: https://man.openbsd.org/snmpd[snmpd]
+:sshd: https://man.openbsd.org/sshd[sshd]
+:Unbound: https://nlnetlabs.nl/projects/unbound/about/[Unbound]
 
-The configuration for running my home {OpenBSD} router.
+The configuration for my {OpenBSD} home router.
 I use a {Protectli} vault, which I highly recommend.
 
 // todo Provide additional static, local IPv6 addresses through DHCPv6 on my local network.
@@ -20,20 +28,26 @@ I use a {Protectli} vault, which I highly recommend.
 // This will require using ISC's kea, `kea` package, instead of the local dhcp server.
 
 .Features
-. Firewall
-. DHCP
-. IPv6
-. Multicast
-. VLAN
-. DNS caching
-. DNS over TLS
-. Support for Matter IoT devices
+* Firewall
+* DHCP
+* IPv6
+* Multicast
+* VLAN
+* DNS caching
+* DNS over TLS
+* Remote access via SSH
+* Support for Matter IoT devices
+* Monitoring via SNMP
 
 .Services
-* PF
-. DHCPd
-* DHCPCD
-* Unbound
+* {dhcpd}
+* {dhcpcd}
+* {mrouted}
+* {PF}
+* {rad}
+* {snmpd}
+* {sshd}
+* {Unbound}
 
 == Overview
 
@@ -51,7 +65,7 @@ No graphical utilities are needed.
 +
 [,sh]
 ----
-doas pkg_add dhcpcd fish git tmux
+doas pkg_add dhcpcd fish git tailscale tmux vim
 ----
 
 . Clone the repository.
@@ -73,7 +87,34 @@ Someday, Id like to create a better way to automate this.
 And care really needs to be taken when modifying the doas configuration.
 I should add special instructions for that as well.
 
+. Add the authentication and encryption passphrases for the SNMPv3 user in the `/etc/snmpd-user-credentials.conf` file.
++
+./etc/etc/snmp-user-credentials.conf
+[source]
+----
+monitor_auth_key="******"
+monitor_enc_key="******"
+----
+
+. Set ownership on the snmpd configuration files.
++
+[,sh]
+----
+doas chown root:_snmpd /etc/snmpd.conf /etc/snmpd-user-credentials.conf
+----
+
+. Set permissions on the snmpd configuration files.
++
+[,sh]
+----
+doas chmod u=w,g=r,o= /etc/snmpd.conf /etc/snmpd-user-credentials.conf
+----
+
 . Reboot to finish the installation.
+
+== Verify Configuration Files
+
+snmpd:: `snmpd -n`
 
 == Code of Conduct
 
