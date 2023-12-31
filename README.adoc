@@ -89,7 +89,7 @@ I should add special instructions for that as well.
 
 . Add the authentication and encryption passphrases for the SNMPv3 user in the `/etc/snmpd-user-credentials.conf` file.
 +
-./etc/etc/snmp-user-credentials.conf
+./etc/etc/snmpd-user-credentials.conf
 [source]
 ----
 monitor_auth_key="******"
