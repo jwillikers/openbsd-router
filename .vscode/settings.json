@@ -1,10 +1,13 @@
 {
     "cSpell.words": [
         "adoc",
+        "authkey",
         "autoselect",
         "dhcpcd",
         "dhcpd",
         "doas",
+        "enckey",
+        "hmac",
         "ifdef",
         "inet",
         "jwillikers",
