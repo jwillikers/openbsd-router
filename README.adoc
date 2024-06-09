@@ -10,7 +10,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 :dhcpd: https://man.openbsd.org/dhcpd[dhcpd]
-:dhcpcd: https://roy.marples.name/projects/dhcpcd[dhcpcd]
+:dhcp6leased: https://man.openbsd.org/dhcp6leased.8[dhcp6leased]
 :mrouted: https://man.openbsd.org/mrouted[mrouted]
 :OpenBSD: https://www.openbsd.org/[OpenBSD]
 :OpenBSD-version: 7.6
@@ -45,7 +45,7 @@ I use a {Protectli} vault, which I highly recommend.
 
 .Services
 * {dhcpd}
-* {dhcpcd}
+* {dhcp6leased}
 * {mrouted}
 * {PF}
 * {rad}
@@ -71,7 +71,7 @@ No graphical utilities are needed.
 +
 [,sh]
 ----
-doas pkg_add dhcpcd fish git tailscale tmux vim
+doas pkg_add fish git tailscale tmux vim
 ----
 
 . Clone the repository.

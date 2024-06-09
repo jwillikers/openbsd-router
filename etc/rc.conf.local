@@ -1,7 +1,8 @@
+dhcp6leased_flags=
 dhcpd_flags=vport0 vlan2 vlan3 vlan4
 mrouted_flags=
 multicast=YES
-pkg_scripts=dhcpcd tailscaled
+pkg_scripts=tailscaled
 rad_flags=
 sndiod_flags=NO
 snmpd_flags=
