@@ -2,6 +2,7 @@
     "cSpell.words": [
         "adoc",
         "authkey",
+        "autoconfiguration",
         "autoselect",
         "dhcpd",
         "doas",
@@ -20,6 +21,7 @@
         "SNMP",
         "tailscale",
         "tailscaled",
+        "vnetid",
         "vport"
     ]
 }

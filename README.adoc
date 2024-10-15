@@ -54,10 +54,30 @@ I use a {Protectli} vault, which I highly recommend.
 == Overview
 
 This configuration is intended for OpenBSD {OpenBSD-version}.
+Egress is on port `em0`, which is connected to my ISP.
+The rest of the physical interfaces are combined using a virtual ethernet bridge.
+Additional VLAN's are used to isolate different parts of the network.
+These are described in the <<VLANs>> table.
 
-todo Describe VLAN configuration and how everything ties together.
+.VLANs
+[cols="1,2"]
+|===
+| VLAN
+| Purpose
 
-todo Discuss issues preferring IPv6 over IPv4.
+| 2
+| Wireless guest network
+
+| 3
+| IoT
+
+| 4
+| Work
+|===
+
+The egress interface obtains an IPv6 address using stateless address autoconfiguration.
+An additional IPv6 prefix is obtained from my ISP using prefix-delegation for the bridge network.
+The primary network and each VLAN receive a `/64` prefix cut from the delegated prefix.
 
 == Usage
 
@@ -65,7 +85,7 @@ todo Discuss issues preferring IPv6 over IPv4.
 The process is documented in the https://www.openbsd.org/faq/faq4.html[OpenBSD FAQ - Installation Guide]
 No graphical utilities are needed.
 
-. Install the necessary packages.
+. Install the Git necessary.
 +
 [,sh]
 ----
@@ -100,7 +120,7 @@ cp etc/snmpd.conf.template etc/snmpd.conf
 chmod 0600 etc/snmpd.conf
 ----
 
-. Add the authentication and encryption passphrases for the SNMPv3 user in the `/etc/snmpd.conf` file.
+. Add the authentication and encryption passphrases for the SNMPv3 user in the `etc/snmpd.conf` file.
 +
 .etc/snmpd.conf
 [source]
@@ -128,12 +148,15 @@ doas ./validate.sh
 == Update
 
 The `update.sh` script is a convenience for running commands to update the OpenBSD system.
+It will initiate upgrades of the system to new major versions, in addition to applying system patches and updating packages.
 Run it as follows.
 
 [,sh]
 ----
-./update.sh
+doas ./update.sh
 ----
+
+For details on upgrading between major versions, find corresponding upgrade guide on the https://www.openbsd.org/faq/[OpenBSD Frequently Asked Questions page].
 
 == Code of Conduct
 
