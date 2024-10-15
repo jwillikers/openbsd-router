@@ -95,7 +95,7 @@ I should add special instructions for that as well.
 
 . Add the authentication and encryption passphrases for the SNMPv3 user in the `/etc/snmpd.users.conf` file.
 +
-./etc/etc/snmpd.users.conf
+./etc/snmpd.users.conf
 [source]
 ----
 user "monitor" auth hmac-sha256 authkey "******" enc aes enckey "******"
