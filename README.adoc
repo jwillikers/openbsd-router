@@ -10,9 +10,10 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 :dhcpd: https://man.openbsd.org/dhcpd[dhcpd]
-:dhcpcd: https://roy.marples.name/projects/dhcpcd[dhcpcd]
+:dhcp6leased: https://man.openbsd.org/dhcp6leased.8[dhcp6leased]
 :mrouted: https://man.openbsd.org/mrouted[mrouted]
 :OpenBSD: https://www.openbsd.org/[OpenBSD]
+:OpenBSD-version: 7.6
 :PF: https://www.openbsd.org/faq/pf/index.html[PF]
 :Protectli: https://protectli.com[Protectli]
 :rad: https://man.openbsd.org/rad[rad]
@@ -44,7 +45,7 @@ I use a {Protectli} vault, which I highly recommend.
 
 .Services
 * {dhcpd}
-* {dhcpcd}
+* {dhcp6leased}
 * {mrouted}
 * {PF}
 * {rad}
@@ -53,6 +54,8 @@ I use a {Protectli} vault, which I highly recommend.
 * {Unbound}
 
 == Overview
+
+This configuration is intended for OpenBSD {OpenBSD-version}.
 
 todo Describe VLAN configuration and how everything ties together.
 
@@ -68,7 +71,7 @@ No graphical utilities are needed.
 +
 [,sh]
 ----
-doas pkg_add dhcpcd fish git tailscale tmux vim
+doas pkg_add fish git tailscale tmux vim
 ----
 
 . Clone the repository.
@@ -92,7 +95,7 @@ I should add special instructions for that as well.
 
 . Add the authentication and encryption passphrases for the SNMPv3 user in the `/etc/snmpd.users.conf` file.
 +
-./etc/etc/snmpd.users.conf
+./etc/snmpd.users.conf
 [source]
 ----
 user "monitor" auth hmac-sha256 authkey "******" enc aes enckey "******"
