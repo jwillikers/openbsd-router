@@ -100,7 +100,7 @@ cmp -s "$dir/etc/sysctl.conf" /etc/sysctl.conf
 sysctl_conf_changed=$?
 
 unbound_conf_changed=0
-if ! cmp -s "$dir/var/unbound/etc/lan-a-records.conf" /var/unbound/etc/lan-a-records.conf || ! cmp -s "$dir/var/unbound/etc/unbound.conf" /var/unbound/etc/unbound.conf; then
+if ! cmp -s "$dir/var/unbound/etc/unbound.conf" /var/unbound/etc/unbound.conf; then
     unbound_conf_changed=1
 fi
 
