@@ -1,4 +1,10 @@
 #!/usr/bin/env ksh
+
+# Install packages and the OpenBSD system configuration files.
+# Restart services and reboot the system as necessary according to the changed files.
+# Note that packages and system files are not deleted by this configuration.
+# Any packages or files removed from the configuration must be manually removed from the system.
+
 dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 
 if [ ! -f "$dir/etc/snmpd.conf" ]; then
