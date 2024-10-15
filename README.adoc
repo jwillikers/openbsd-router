@@ -29,8 +29,6 @@ I use a {Protectli} vault, which I highly recommend.
 // Then provide IPv6 addresses for the DNS servers on the router.
 // This will require using ISC's kea, `kea` package, instead of the local dhcp server.
 
-// todo NTP
-
 .Features
 * Firewall
 * DHCP
@@ -71,7 +69,7 @@ No graphical utilities are needed.
 +
 [,sh]
 ----
-doas pkg_add fish git tailscale tmux vim
+doas pkg_add git
 ----
 
 . Clone the repository.
@@ -88,38 +86,54 @@ git clone https://github.com/jwillikers/openbsd-router
 cd openbsd-router
 ----
 
-. Install or symlink everything.
-Someday, Id like to create a better way to automate this.
-And care really needs to be taken when modifying the doas configuration.
-I should add special instructions for that as well.
-
-. Add the authentication and encryption passphrases for the SNMPv3 user in the `/etc/snmpd.users.conf` file.
+. Copy the `etc/snmpd.conf.template` file to `etc/snmpd.conf`.
 +
-./etc/snmpd.users.conf
+[,sh]
+----
+cp etc/snmpd.conf.template etc/snmpd.conf
+----
+
+. Restrict permissions on `etc/snmpd.users.conf`.
++
+[,sh]
+----
+chmod 0600 etc/snmpd.conf
+----
+
+. Add the authentication and encryption passphrases for the SNMPv3 user in the `/etc/snmpd.conf` file.
++
+.etc/snmpd.conf
 [source]
 ----
 user "monitor" auth hmac-sha256 authkey "******" enc aes enckey "******"
 ----
 
-. Set ownership on the snmpd configuration files.
+. Install everything.
 +
 [,sh]
 ----
-doas chown root:_snmpd /etc/snmpd.conf /etc/snmpd.users.conf
+doas ./install.sh
 ----
 
-. Set permissions on the snmpd configuration files.
-+
+== Validate Configuration Files
+
+The `validate.sh` script can be used to validate some of the configuration files.
+Run it to ensure everything is hunky dory.
+
 [,sh]
 ----
-doas chmod u=w,g=r,o= /etc/snmpd.conf /etc/snmpd.users.conf
+doas ./validate.sh
 ----
 
-. Reboot to finish the installation.
+== Update
 
-== Verify Configuration Files
+The `update.sh` script is a convenience for running commands to update the OpenBSD system.
+Run it as follows.
 
-snmpd:: `doas snmpd -n`
+[,sh]
+----
+./update.sh
+----
 
 == Code of Conduct
 
