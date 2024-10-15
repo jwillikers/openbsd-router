@@ -13,6 +13,7 @@ endif::[]
 :dhcpcd: https://roy.marples.name/projects/dhcpcd[dhcpcd]
 :mrouted: https://man.openbsd.org/mrouted[mrouted]
 :OpenBSD: https://www.openbsd.org/[OpenBSD]
+:OpenBSD-version: 7.6
 :PF: https://www.openbsd.org/faq/pf/index.html[PF]
 :Protectli: https://protectli.com[Protectli]
 :rad: https://man.openbsd.org/rad[rad]
@@ -53,6 +54,8 @@ I use a {Protectli} vault, which I highly recommend.
 * {Unbound}
 
 == Overview
+
+This configuration is intended for OpenBSD {OpenBSD-version}.
 
 todo Describe VLAN configuration and how everything ties together.
 
