@@ -118,34 +118,34 @@ if [ $unbound_conf_changed -ne 0 ]; then
     fi
 fi
 
-install -d -g wheel -m 0755 -o root /etc
-install -d -g wheel -m 0755 -o root /etc/ssh
-install -d -g wheel -m 0755 -o root /etc/ssh/ssh_config.d
-install -C -g wheel -m 0644 -o root "$dir/etc/ssh/ssh_config" /etc/ssh/ssh_config
-install -C -g wheel -m 0644 -o root "$dir"/etc/ssh/ssh_config.d/*.conf /etc/ssh/ssh_config.d/
-install -d -g wheel -m 0755 -o root /etc/ssh/sshd_config.d
-install -C -g wheel -m 0644 -o root "$dir/etc/ssh/sshd_config" /etc/ssh/sshd_config
-install -C -g wheel -m 0644 -o root "$dir"/etc/ssh/sshd_config.d/*.conf /etc/ssh/sshd_config.d/
-install -C -g wheel -m 0644 -o root "$dir/etc/defaultdomain" /etc/
-install -C -g wheel -m 0644 -o root "$dir/etc/dhcp6leased.conf" /etc/
-install -C -g wheel -m 0644 -o root "$dir/etc/dhcpd.conf" /etc/
-install -C -g wheel -m 0600 -o root "$dir/etc/doas.conf" /etc/
-install -C -g wheel -m 0640 -o root "$dir"/etc/hostname.* /etc/
-install -C -g wheel -m 0644 -o root "$dir/etc/hosts" /etc/
-install -C -g wheel -m 0644 -o root "$dir/etc/mrouted.conf" /etc/
-install -C -g wheel -m 0644 -o root "$dir/etc/myname" /etc/
-install -C -g wheel -m 0600 -o root "$dir/etc/pf.conf" /etc/
-install -C -g wheel -m 0644 -o root "$dir/etc/rad.conf" /etc/
-install -C -g wheel -m 0644 -o root "$dir/etc/rc.conf.local" /etc/
-install -C -g wheel -m 0644 -o root "$dir/etc/resolv.conf.tail" /etc/
-install -C -g wheel -m 0644 -o root "$dir/etc/shells" /etc/
-install -C -g _snmpd -m 0640 -o root "$dir/etc/snmpd.conf" /etc/
-install -C -g wheel -m 0644 -o root "$dir/etc/sysctl.conf" /etc/
+install -d -g wheel -m 0755 -o root /etc || exit 1
+install -d -g wheel -m 0755 -o root /etc/ssh || exit 1
+install -d -g wheel -m 0755 -o root /etc/ssh/ssh_config.d || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/ssh/ssh_config" /etc/ssh/ssh_config || exit 1
+install -C -g wheel -m 0644 -o root "$dir"/etc/ssh/ssh_config.d/*.conf /etc/ssh/ssh_config.d/ || exit 1
+install -d -g wheel -m 0755 -o root /etc/ssh/sshd_config.d || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/ssh/sshd_config" /etc/ssh/sshd_config || exit 1
+install -C -g wheel -m 0644 -o root "$dir"/etc/ssh/sshd_config.d/*.conf /etc/ssh/sshd_config.d/ || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/defaultdomain" /etc/ || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/dhcp6leased.conf" /etc/ || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/dhcpd.conf" /etc/ || exit 1
+install -C -g wheel -m 0600 -o root "$dir/etc/doas.conf" /etc/ || exit 1
+install -C -g wheel -m 0640 -o root "$dir"/etc/hostname.* /etc/ || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/hosts" /etc/ || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/mrouted.conf" /etc/ || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/myname" /etc/ || exit 1
+install -C -g wheel -m 0600 -o root "$dir/etc/pf.conf" /etc/ || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/rad.conf" /etc/ || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/rc.conf.local" /etc/ || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/resolv.conf.tail" /etc/ || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/shells" /etc/ || exit 1
+install -C -g _snmpd -m 0640 -o root "$dir/etc/snmpd.conf" /etc/ || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/sysctl.conf" /etc/ || exit 1
 
-install -d -g wheel -m 0755 -o root /var
-install -d -g wheel -m 0755 -o root /var/unbound
-install -d -g wheel -m 0755 -o root /var/unbound/etc
-install -C -g wheel -m 0644 -o root "$dir"/var/unbound/etc/*.conf /var/unbound/etc/
+install -d -g wheel -m 0755 -o root /var || exit 1
+install -d -g wheel -m 0755 -o root /var/unbound || exit 1
+install -d -g wheel -m 0755 -o root /var/unbound/etc || exit 1
+install -C -g wheel -m 0644 -o root "$dir"/var/unbound/etc/*.conf /var/unbound/etc/ || exit 1
 
 i=0
 for hostname in $hostnames; do
