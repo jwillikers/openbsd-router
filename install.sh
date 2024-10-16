@@ -1,4 +1,4 @@
-#!/usr/bin/env ksh
+#!/usr/bin/env sh
 
 # Install packages and the OpenBSD system configuration files.
 # Restart services and reboot the system as necessary according to the changed files.

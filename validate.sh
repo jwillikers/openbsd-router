@@ -1,4 +1,4 @@
-#!/usr/bin/env ksh
+#!/usr/bin/env sh
 
 # Validate config files.
 
