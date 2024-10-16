@@ -113,7 +113,7 @@ cd openbsd-router
 cp etc/snmpd.conf.template etc/snmpd.conf
 ----
 
-. Restrict permissions on `etc/snmpd.users.conf`.
+. Restrict permissions on `etc/snmpd.conf`.
 +
 [,sh]
 ----

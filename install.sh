@@ -90,7 +90,7 @@ if [ $sshd_conf_changed -ne 0 ]; then
 fi
 
 snmpd_conf_changed=0
-if ! cmp -s "$dir/etc/snmpd.conf" /etc/snmpd.conf || ! cmp -s "$dir/etc/snmpd.users.conf" /etc/snmpd.users.conf; then
+if ! cmp -s "$dir/etc/snmpd.conf" /etc/snmpd.conf; then
     snmpd_conf_changed=1
 fi
 
@@ -140,7 +140,6 @@ install -C -g wheel -m 0644 -o root "$dir/etc/rc.conf.local" /etc/
 install -C -g wheel -m 0644 -o root "$dir/etc/resolv.conf.tail" /etc/
 install -C -g wheel -m 0644 -o root "$dir/etc/shells" /etc/
 install -C -g _snmpd -m 0640 -o root "$dir/etc/snmpd.conf" /etc/
-install -C -g _snmpd -m 0640 -o root "$dir/etc/snmpd.users.conf" /etc/
 install -C -g wheel -m 0644 -o root "$dir/etc/sysctl.conf" /etc/
 
 install -d -g wheel -m 0755 -o root /var
