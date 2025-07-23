@@ -1,5 +1,6 @@
 parent vport1
 vnetid 2
 inet 10.2.0.1 255.255.255.0 10.2.0.255
+inet6 alias fd00:1020::1/64
 group guest_lan
 up

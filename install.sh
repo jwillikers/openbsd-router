@@ -10,6 +10,10 @@ dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 if [ ! -f "$dir/etc/snmpd.conf" ]; then
     echo "The file '$dir/etc/snmpd.conf' does not exist." 1>&2
     echo "Copy '$dir/etc/snmpd.conf.template' to '$dir/etc/snmpd.conf' and edit the file appropriately before running this script." 1>&2
+    echo "Run the following commands to copy this file and set its ownership correctly."
+    echo "cp '$dir/etc/snmpd.conf.template' '$dir/etc/snmpd.conf'"
+    echo "doas chown root:_snmpd '$dir/etc/snmpd.conf'"
+    echo "doas chown 0640 '$dir/etc/snmpd.conf'"
     exit 1
 fi
 
@@ -24,7 +28,7 @@ dhcp6leased_conf_changed=$?
 cmp -s "$dir/etc/dhcpd.conf" /etc/dhcpd.conf
 dhcpd_conf_changed=$?
 
-hostnames=$(cd "$dir/etc" && ls -1 hostname.*)
+hostnames=$(find "$dir"/etc/hostname.* | sed 's#.*/##' | awk -F"." '{print $2}')
 i=0
 for hostname in $hostnames; do
     cmp -s "$dir/etc/hostname.$hostname" "/etc/hostname.$hostname"
@@ -87,6 +91,13 @@ if [ $sshd_conf_changed -ne 0 ]; then
     else
         rm -f "$tmp_sshd_config"
     fi
+fi
+
+if [ "$dir/etc/snmpd.conf.template" -nt "$dir/etc/snmpd.conf" ]; then
+    echo "The file '$dir/etc/snmpd.conf.template' appears to have changed after '$dir/etc/snmpd.conf' was last modified." 1>&2
+    echo "Please update '$dir/etc/snmpd.conf' according to the template file." 1>&2
+    echo "To ignore this check, run 'touch \"$dir/etc/snmpd.conf\"'." 1>&2
+    exit 1
 fi
 
 snmpd_conf_changed=0
@@ -187,7 +198,7 @@ if [ $mrouted_conf_changed -ne 0 ]; then
 fi
 
 if [ $rad_conf_changed -ne 0 ]; then
-    if ! rad -f "/etc/snmpd.conf" -n; then
+    if ! rad -f "/etc/rad.conf" -n; then
         echo "Failed to validate the rad config file: /etc/rad.conf" 1>&2
         exit 1
     fi
