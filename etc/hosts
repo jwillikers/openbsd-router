@@ -2,3 +2,4 @@
 ::1		localhost
 
 10.1.0.1 router.lan.jwillikers.io router.jwillikers.io router
+fd00:1010::1 router.lan.jwillikers.io router.jwillikers.io router

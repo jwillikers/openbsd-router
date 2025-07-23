@@ -19,6 +19,7 @@
         "SIGHUP",
         "sndiod",
         "SNMP",
+        "steamdeck",
         "tailscale",
         "tailscaled",
         "vnetid",
