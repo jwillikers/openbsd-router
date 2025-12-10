@@ -1,4 +1,5 @@
 inet 10.1.0.1 255.255.255.0 10.1.0.255
+inet6
 inet6 alias fd00:1010::1/64
 group trusted_lan
 up
