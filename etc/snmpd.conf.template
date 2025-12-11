@@ -6,8 +6,8 @@ vport0_ipv6_addr="fd00:1010::1"
 vlan2_ipv6_addr="fd00:1020::1"
 vlan3_ipv6_addr="fd00:1030::1"
 vlan4_ipv6_addr="fd00:1040::1"
-tailscale_ipv4_addr="100.127.231.23"
-tailscale_ipv6_addr="fd7a:115c:a1e0:ab12:4843:cd96:627f:e717"
+tailscale_ipv4_addr="100.99.231.15"
+tailscale_ipv6_addr="fd7a:115c:a1e0::2a37:e70f"
 
 listen on udp $vport0_ipv4_addr read
 listen on udp $vlan2_ipv4_addr read

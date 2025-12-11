@@ -46,6 +46,7 @@ cmp -s "$dir/etc/pf.conf" /etc/pf.conf
 pf_conf_changed=$?
 
 # Verify pf.conf before installing it.
+# todo On a fresh install, this was failing due to the interfaces not being updated.
 if [ $pf_conf_changed -ne 0 ]; then
     if ! pfctl -f "$dir/etc/pf.conf"; then
         echo "Failed to load updated pf.conf." 1>&2
