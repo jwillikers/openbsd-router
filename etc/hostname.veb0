@@ -1,9 +1,16 @@
 link0
 add vport0
+tagged vport0 =1-4
 add vport1
+tagged vport1 =1-4
 add em1
+tagged em1 =1-4
 add em2
+tagged em2 =1-4
 add em3
+tagged em3 =1-4
 add em4
+tagged em4 =1-4
 add em5
+tagged em5 =1-4
 up
