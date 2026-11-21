@@ -17,7 +17,8 @@ if [ ! -f "$dir/etc/snmpd.conf" ]; then
     exit 1
 fi
 
-pkg_add fish git tailscale vim--no_x11 || exit 1
+# Both fish 4 (shells/fish/main) and fish 3 (shells/fish/v3) share the package name "fish", so select the branch to avoid an interactive prompt.
+pkg_add fish%main git tailscale vim--no_x11 || exit 1
 
 cmp -s "$dir/etc/defaultdomain" /etc/defaultdomain
 defaultdomain_changed=$?
