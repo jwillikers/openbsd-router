@@ -40,3 +40,8 @@ if ! unbound-checkconf "$dir/var/unbound/etc/unbound.conf"; then
     echo "Failed to validate the unbound config file: $dir/var/unbound/etc/unbound.conf" 1>&2
     exit 1
 fi
+
+if ! sh -n "$dir/etc/rc.local"; then
+    echo "Failed to validate the rc.local file: $dir/etc/rc.local" 1>&2
+    exit 1
+fi

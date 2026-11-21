@@ -149,6 +149,7 @@ install -C -g wheel -m 0644 -o root "$dir/etc/myname" /etc/ || exit 1
 install -C -g wheel -m 0600 -o root "$dir/etc/pf.conf" /etc/ || exit 1
 install -C -g wheel -m 0644 -o root "$dir/etc/rad.conf" /etc/ || exit 1
 install -C -g wheel -m 0644 -o root "$dir/etc/rc.conf.local" /etc/ || exit 1
+install -C -g wheel -m 0644 -o root "$dir/etc/rc.local" /etc/ || exit 1
 install -C -g wheel -m 0644 -o root "$dir/etc/resolv.conf.tail" /etc/ || exit 1
 install -C -g wheel -m 0644 -o root "$dir/etc/shells" /etc/ || exit 1
 install -C -g _snmpd -m 0640 -o root "$dir/etc/snmpd.conf" /etc/ || exit 1
@@ -225,7 +226,8 @@ if [ $snmpd_conf_changed -ne 0 ]; then
         echo "Failed to validate the snmpd config file: /etc/snmpd.conf" 1>&2
         exit 1
     fi
-    if ! rcctl restart snmpd; then
+    # snmpd is disabled in rc.conf.local and started from rc.local, so it must be forced.
+    if ! rcctl -f restart snmpd; then
         echo "Failed to restart the snmpd service." 1>&2
         exit 1
     fi

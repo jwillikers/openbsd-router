@@ -5,5 +5,6 @@ multicast=YES
 pkg_scripts=tailscaled
 rad_flags=
 sndiod_flags=NO
-snmpd_flags=
+# snmpd is started from /etc/rc.local after Tailscale is up.
+snmpd_flags=NO
 unbound_flags=

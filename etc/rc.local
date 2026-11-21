@@ -1,0 +1,25 @@
+# Site-specific startup actions, run by /etc/rc after the package daemons in pkg_scripts have been started.
+
+# Start snmpd once Tailscale has assigned its addresses.
+# snmpd listens on the Tailscale addresses and can't bind to them before they exist.
+# Base system daemons are started by /etc/rc before pkg_scripts, so snmpd is disabled in rc.conf.local and started here instead.
+# This runs in the background so that boot isn't delayed if Tailscale is slow or unavailable.
+# If the Tailscale addresses don't appear before the timeout, snmpd is started anyway so the local networks can still be monitored.
+(
+    timeout=120
+    while [ $timeout -gt 0 ]; do
+        ipv4=$(/usr/local/bin/tailscale ip -4 2>/dev/null)
+        ipv6=$(/usr/local/bin/tailscale ip -6 2>/dev/null)
+        if [ -n "$ipv4" ] && [ -n "$ipv6" ] &&
+            ifconfig | grep -q "inet $ipv4 " &&
+            ifconfig | grep "inet6 $ipv6 " | grep -qv tentative; then
+            break
+        fi
+        sleep 1
+        timeout=$((timeout - 1))
+    done
+    if [ $timeout -le 0 ]; then
+        logger -t rc.local "Timed out waiting for the Tailscale addresses, starting snmpd anyway"
+    fi
+    rcctl -f start snmpd 2>&1 | logger -t rc.local
+) </dev/null >/dev/null 2>&1 &
